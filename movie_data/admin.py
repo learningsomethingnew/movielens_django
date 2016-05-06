@@ -1,8 +1,7 @@
 from django.contrib import admin
 
-from .models import Movies, Users, Reviews
+from .models import Movie, Critic, Review
 
-
-admin.site.register(Movies)
-admin.site.register(Users)
-admin.site.register(Reviews)
+admin.site.register(Movie)
+admin.site.register(Critic)
+admin.site.register(Review)

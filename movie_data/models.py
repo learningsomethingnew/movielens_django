@@ -3,46 +3,49 @@ from django.db import models
 from django.utils import timesince
 import datetime
 
-# movie id | movie title | release date | video release date | IMDb URL | unknown | Action | Adventure |
-# Animation | Children's | Comedy | Crime | Documentary | Drama | Fantasy | Film-Noir | Horror | Musical |
-# Mystery | Romance | Sci-Fi | Thriller | War | Western |
-#1|Toy Story (1995)|01-Jan-1995||http://us.imdb.com/M/title-exact?Toy%20Story%20(1995)|0|0|0|1|1|1|0|0|0|0|0|0|0|0|0|0|0|0|0
-class Movies(models.Model):
-    movie_id = models.IntegerField( null = False )
-    movie_title = models.CharField( max_length = 200 )
-    release_date = models.DateField()
+
+# Things to do:
+# Rename classes to singular
+# movie_title to title
+# drop movie_id and user_id in favor of built in id
+# Reviews.user_id and movie_id remove _id
+
+class Movie(models.Model):
+    title = models.CharField(max_length=200)
+    release = models.DateField()
 
     def __str__(self):
-        return self.movie_title
+        return self.title
 
     def time_since_published(self):
         temp_date = datetime.datetime.strptime(self.release_date)
         return timesince.timesince(temp_date)
 
 
-
-#1|24|M|technician|85711
-class Users(models.Model):
-    user_id = models.IntegerField()
+# 1|24|M|technician|85711
+class Critic(models.Model):
     age = models.IntegerField()
-    sex = models.CharField( max_length=1 )
+    sex = models.CharField(max_length=1)
     zip_code = models.IntegerField()
 
     def __str__(self):
-        return self.user_id
+        return "{} Aged {}".format(self.sex, self.age)
 
 
 # user id | item id | rating | timestamp.
-#253	465	5	891628467
-class Reviews(models.Model):
-    user_id = models.ForeignKey(
-        Users,
+# 253	465	5	891628467
+class Review(models.Model):
+    critic = models.ForeignKey(
+        Critic,
         on_delete=models.CASCADE
     )
 
-    movie_id = models.ForeignKey(
-        Movies,
+    movie = models.ForeignKey(
+        Movie,
         on_delete=models.CASCADE
     )
 
     rating = models.IntegerField()
+
+    def __str__(self):
+        return "Movie - {}: Score - {}".format(self.movie, self.rating)
