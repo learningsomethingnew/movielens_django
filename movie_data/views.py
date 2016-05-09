@@ -19,3 +19,9 @@ def critic(request, critic_id):
     return render(request, 'movies/critic.html',
                   {'critic': all_critics,
                    'reviewed': movies_reviewed})
+
+
+def top(request, num=20):
+    top_n = Movie.get_top(num)
+    top_movies = {'top': top_n}
+    return (request, 'movies/top', top_movies)

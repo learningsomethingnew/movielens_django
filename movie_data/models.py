@@ -22,9 +22,11 @@ class Movie(models.Model):
 
     def time_since_published(self):
         temp_date = datetime.datetime.strptime(self.release_date)
-
         return timesince.timesince(temp_date)
 
+    @staticmethod
+    def get_top(num):
+        return Movie.objects.order_by('avg_rating')
 
 
 # 1|24|M|technician|85711
@@ -32,6 +34,7 @@ class Critic(models.Model):
     age = models.IntegerField()
     sex = models.CharField(max_length=1)
     zip_code = models.IntegerField()
+
 
     def __str__(self):
         return "{} Aged {}".format(self.sex, self.age)

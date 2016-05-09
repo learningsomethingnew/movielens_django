@@ -1,0 +1,15 @@
+<table>
+    <tr>
+        <th>Movie Name</th>
+        <th>Movie Release Date</th>
+        <th>Average Score</th>
+    </tr>
+    {% for movie in top %}
+    <tr>
+        <td><a href="{% url 'movie_data:detail' movie.id %}">{{ movie.title }}</a></td>
+        <td> {{ movie.release }}</td>
+        <td> {{ movie.avg_rating | floatformat:2 }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
