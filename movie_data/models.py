@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 from django.utils import timesince
 import datetime
+from django.template import loader
 
 
 # Things to do:
@@ -13,13 +14,17 @@ import datetime
 class Movie(models.Model):
     title = models.CharField(max_length=200)
     release = models.DateField()
+    avg_rating = models.FloatField(default=0.0)
+    num_reviews = models.IntegerField(default=0)
 
     def __str__(self):
-        return self.title
+        return str(self.id)
 
     def time_since_published(self):
         temp_date = datetime.datetime.strptime(self.release_date)
+
         return timesince.timesince(temp_date)
+
 
 
 # 1|24|M|technician|85711
@@ -47,5 +52,9 @@ class Review(models.Model):
 
     rating = models.IntegerField()
 
+
+
     def __str__(self):
-        return "Movie - {}: Score - {}".format(self.movie, self.rating)
+        return "Movie - {}: Score - {}".format(self.movie,
+                                               self.rating)
+

@@ -1,18 +1,18 @@
 from django.conf.urls import url
 
-from . import views
+from .views import detail, index, critic
 
 app_name = 'movie_data'
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', index, name='index'),
 
     # Get movie id
-    url(r'^(?P<movie_id>[0-9]+)/$', views.detail, name='detail'),
+    url(r'^movie/(?P<movie_id>[0-9]+)/$', detail, name='detail'),
 
-    # # move id results
-    # url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
-    #
+    # move id results
+    url(r'^critic/(?P<critic_id>[0-9]+)/$', critic, name='critic'),
+
     # # GET /polls/5/vote/
     # url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
 ]

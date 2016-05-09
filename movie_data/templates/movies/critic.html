@@ -1,0 +1,27 @@
+<img src="http://lorempixel.com/182/268/people" style="float: left;">
+<table>
+    <tr>
+        <th>User ID</th>
+        <th>Age</th>
+        <th>Sex</th>
+    </tr>
+    <tr>
+        <th>{{ critic.id }}</th>
+        <th>{{ critic.age }}</th>
+        <th>{{ critic.sex }}</th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th>Movie</th>
+        <th>Score</th>
+    </tr>
+    {% for rev in reviewed %}
+    <tr>
+        <td> <a href="{% url 'movie_data:detail' rev.movie.id %}" > {{rev.movie.title }} </a></td>
+        <td> {{ rev.rating}} </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
