@@ -1,14 +1,18 @@
 <table>
     <tr>
+        <th>Rank</th>
         <th>Movie Name</th>
         <th>Movie Release Date</th>
         <th>Average Score</th>
+        <th>Number of Reviews</th>
     </tr>
     {% for movie in top %}
     <tr>
-        <td><a href="{% url 'movie_data:detail' movie.id %}">{{ movie.title }}</a></td>
+        <td>{{ forloop.counter }}</td>
+        <td><a href="{% url 'movie_data:detail' movie.id %}"> {{ movie.title }} </a></td>
         <td> {{ movie.release }}</td>
         <td> {{ movie.avg_rating | floatformat:2 }}</td>
+        <td>{{ movie.num_reviews }}</td>
     </tr>
     {% endfor %}
 </table>
