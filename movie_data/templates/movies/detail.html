@@ -6,4 +6,16 @@
 
 
 
-<h2></h2>
+<table>
+    <tr>
+        <th>Reviewer ID</th>
+        <th>Score</th>
+    </tr>
+    {% for movie in reviewed %}
+    <tr>
+        <td><a href="{% url 'movie_data:critic' movie.critic.id %}">{{ movie.critic.id }}</a></td>
+        <td>{{ movie.rating}}</td>
+    </tr>
+    {% endfor %}
+</table>
+

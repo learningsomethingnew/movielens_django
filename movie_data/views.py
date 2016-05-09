@@ -9,7 +9,8 @@ def index(request):
 
 def detail(request, movie_id):
     all_movies = get_object_or_404(Movie, id=movie_id)
-    return render(request, 'movies/detail.html', {'movie': all_movies})
+    movies_reviewed = Review.objects.filter(movie=movie_id)
+    return render(request, 'movies/detail.html', {'movie': all_movies, 'reviewed': movies_reviewed})
 
 
 def critic(request, critic_id):
