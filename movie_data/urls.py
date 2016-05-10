@@ -1,6 +1,6 @@
 from django.conf.urls import url
 
-from .views import detail, index, critic, top
+from .views import detail, index, critic, top, search
 
 app_name = 'movie_data'
 
@@ -16,9 +16,8 @@ urlpatterns = [
     # top 20 movies
     url(r'^top(?P<num>[0-9]+)/$', top, name='top'),
 
-    # Login information
-    # url(r'^login/$', 'django.contrib.auth.views.login'),
-    # url(r'^logout/$', 'django.contrib.auth.views.logout'),
+    # search
+    url(r'^search/$', search, name='search')
 
     # # GET /polls/5/vote/
     # url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),

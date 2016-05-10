@@ -1,0 +1,5 @@
+{% if authed %}
+    you are logged in as {{ username }}
+{% else %}
+    you are not logged in, please <a href="{% url 'login' %}">login</a>
+{% endif %}

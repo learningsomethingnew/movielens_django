@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <title>Movie Search</title>
+    </head>
+    <body>
+        {% if error %}
+            <div id="error">Please submit a search term</div>
+        {% endif %}
+
+        <form action="/movie_data/search/" method="get">
+            <input type="text" name="q">
+            <input type="submit" value="Search">
+        </form>
+
+            <p>You searched for: <strong>{{ query }}</strong></p>
+            {% if movie_search %}
+                <p>Found {{ movie_search.count }}.</p>
+                <ul>
+                    {% for movie in movie_search %}
+                        <li><a href="{% url 'movie_data:detail' movie.id %}">{{ movie.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No movies matched your search criteria.</p>
+        {% endif %}
+    </body>
+</html>

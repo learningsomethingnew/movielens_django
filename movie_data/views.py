@@ -28,3 +28,24 @@ def top(request, num=20):
                   'movies/top.html',
                   {'top': top_n}
                   )
+
+
+# Search Functionality
+def search_form(request):
+    return render(request, 'movies/search_form.html', {'error': False})
+
+
+def search(request):
+    error = False
+    if 'q' in request.GET:
+        q = request.GET['q']
+        if not q:
+            error = True
+        else:
+            movie_search = Movie.objects.filter(title__icontains=q)
+            return render(request, 'movies/search.html',
+                          {'movie_search': movie_search,
+                           'query': q
+                           })
+    return render(request, 'movies/search_form.html', {'error': error})
+
