@@ -13,8 +13,12 @@ urlpatterns = [
     # move id results
     url(r'^critic/(?P<critic_id>[0-9]+)/$', critic, name='critic'),
 
+    # top20 without number
+    url(r'^top/$', top, name='top'),
+
     # top 20 movies
     url(r'^top(?P<num>[0-9]+)/$', top, name='top'),
+
 
     # search
     url(r'^search/$', search, name='search')

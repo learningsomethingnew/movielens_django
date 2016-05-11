@@ -4,12 +4,11 @@ from __future__ import unicode_literals
 import csv
 
 from django.db import migrations
-from django.contrib.auth.models import User
 from movie_data.models import Critic
 from django.contrib.auth.models import User
 
-male_list = []
-female_list = []
+
+master_list = []
 
 
 def process_rand_users():
@@ -20,37 +19,22 @@ def process_rand_users():
         reader = csv.DictReader(f, fieldnames=fieldnames, delimiter=',')
 
         for user_info in reader:
-            if user_info['sex'] == 'M':
-                male_list.append(user_info)
-            else:
-                female_list.append(user_info)
+            master_list.append(user_info)
 
 
 def create_account(apps, schema):
     process_rand_users()
-
-    for i, critic in enumerate(Critic):
-        if critic.sex == 'M':
-            user = User.objects.create_user(
-                male_list[i]['username'],
-                male_list[i]['email'],
-                male_list[i]['password'],
-            )
-            user.first_name = male_list[i]['first']
-            user.last_name = male_list[i]['last']
-        else:
-            if critic.sex == 'F':
-                user = User.objects.create_user(
-                    female_list[i]['username'],
-                    female_list[i]['email'],
-                    female_list[i]['password'],
-                )
-                user.first_name = female_list[i]['first']
-                user.last_name = female_list[i]['last']
-
-
-def delete_item(user_dict):
-    pass
+    x = 2
+    for i, critic in enumerate(Critic.objects.all()):
+        user, was_created = User.objects.get_or_create(
+            id = x,
+            username = master_list[i]['username'],
+            password ='password',
+            email = master_list[i]['email'],
+            first_name = master_list[i]['first'],
+            last_name = master_list[i]['last'],
+        )
+        x += 1
 
 
 class Migration(migrations.Migration):
@@ -59,7 +43,7 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        # migrations.RunPython()
+        migrations.RunPython(create_account)
     ]
 
 

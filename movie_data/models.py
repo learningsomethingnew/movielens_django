@@ -2,6 +2,7 @@ import datetime
 from django.db import models
 from django.utils import timesince
 import datetime
+from django.contrib.auth.models import User
 from django.template import loader
 
 
@@ -64,6 +65,7 @@ class Critic(models.Model):
     age = models.IntegerField()
     sex = models.CharField(max_length=1)
     zip_code = models.IntegerField()
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True)
 
 
     def __str__(self):
@@ -84,7 +86,6 @@ class Review(models.Model):
     )
 
     rating = models.IntegerField()
-
 
 
     def __str__(self):

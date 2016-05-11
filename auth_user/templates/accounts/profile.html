@@ -1,5 +1,12 @@
-{% if authed %}
-    you are logged in as {{ username }}
-{% else %}
-    you are not logged in, please <a href="{% url 'login' %}">login</a>
-{% endif %}
+{% extends "templates/movielens/base.html" %}
+{% block content %}
+
+<h2>Profile</h2>
+
+<form action="" method="POST">
+    {% for option in options %}
+        <ul> {{ option }}: <input type="text" name="first_name" placeholder="{{ option.fname }}">  </ul>
+    {% endfor %}
+</form>
+
+{% endblock content %}

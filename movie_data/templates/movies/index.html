@@ -1,10 +1,6 @@
-<h2>Search for Movie</h2>
-<form action="/movie_data/search/" method="get">
-    <input type="text" name="q">
-    <input type="submit" value="Search">
-</form>
+{% extends "templates/movielens/base.html" %}
+{% block content %}
 
-<p></p>
 <h2>Current Movie List</h2>
 <table>
     <tr>
@@ -21,3 +17,4 @@
     {% endfor %}
 </table>
 
+{% endblock content %}

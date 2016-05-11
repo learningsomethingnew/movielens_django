@@ -33,4 +33,7 @@
 {# Assumes you setup the password_reset view in your URLconf #}
 <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
 
+{# New User#}
+<p><a href="{% url 'auth_user:register' %}">New User?</a></p>
+
 {% endblock %}

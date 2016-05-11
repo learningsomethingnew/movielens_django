@@ -24,6 +24,7 @@ def critic(request, critic_id):
 
 def top(request, num=20):
     top_n = Movie.get_top(num)
+    print(num)
     return render(request,
                   'movies/top.html',
                   {'top': top_n}

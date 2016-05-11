@@ -1,0 +1,19 @@
+<a href="/movie_data/">Home</a>
+
+{% if user.is_authenticated %}
+            <p class="navbar-text pull-right">Welcome, {{ user.username }}. <a href="/logout/"> Logout</a> </p>
+          {% else %}
+            <p class="navbar-text pull-right">Welcome, new user. Please <a href="/login/">login</a></p>
+          {% endif %}
+
+<div id="search">
+    <form action="/movie_data/search/" method="get">
+        <input type="text" name="q" placeholder="Search Movie Name">
+        <input type="submit" value="Search">
+    </form>
+</div>
+<hr>
+<body>
+{% block content %}
+{% endblock content %}
+</body>
